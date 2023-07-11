@@ -18,6 +18,11 @@ function App() {
     setContactList(sortedData);
   }
 
+  const actorDelete = (id) => {
+    const updatedContactList = contactList.filter((contact) => contact.id !== id);
+    setContactList(updatedContactList);
+  };
+
   const sortByPopularity = () => {
     const sortedContacts = [...contactList].sort((a, b) => {
       return b.popularity - a.popularity;
@@ -59,11 +64,13 @@ function App() {
           </tr>
         </thead>
         <tbody>
+        
           {contactList.map((contact) => (
             <tr key={contact.id}>
               <td>
                 <img src={contact.pictureUrl} alt={contact.name} />
               </td>
+              <td><button onClick={()=>actorDelete(contact.id)}>delete</button></td>
               <td>{contact.name}</td>
               <td>{contact.popularity}</td>
               <td>{contact.wonOscar && <p>🏆</p>}</td>
